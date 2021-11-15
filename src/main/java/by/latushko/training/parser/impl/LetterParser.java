@@ -11,13 +11,13 @@ public class LetterParser implements TextParser {
 
     @Override
     public TextComposite parse(String text) {
-        String[] symbols = text.split(LETTER_DELIMITER_PATTERN);
+        String[] letters = text.split(LETTER_DELIMITER_PATTERN);
         TextComposite letterComposite = new TextComposite(TextComponentType.LETTER);
 
-        for(String s: symbols) {
-            TextComponent letterComponent = new CharacterNode(
-                    Character.isLetter(s.charAt(0)) ? TextComponentType.LETTER : TextComponentType.CHARACTER,
-                    s.charAt(0));
+        for(String l: letters) {
+            char character = l.charAt(0);
+            TextComponentType type = Character.isLetter(character) ? TextComponentType.LETTER : TextComponentType.CHARACTER;
+            TextComponent letterComponent = new CharacterNode(type, character);
 
             letterComposite.add(letterComponent);
         }

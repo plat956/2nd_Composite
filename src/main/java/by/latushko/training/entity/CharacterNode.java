@@ -13,12 +13,12 @@ public class CharacterNode implements TextComponent{
 
     @Override
     public void add(TextComponent component) {
-        throw new UnsupportedOperationException("Forbidden to add a component");
+        throw new UnsupportedOperationException("Operation 'add' is unsupported");
     }
 
     @Override
     public void remove(TextComponent component) {
-        throw new UnsupportedOperationException("Forbidden to remove a component");
+        throw new UnsupportedOperationException("Operation 'remove' is unsupported");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CharacterNode implements TextComponent{
 
     @Override
     public List<TextComponent> getComponents() {
-        throw new UnsupportedOperationException("No components to return");
+        throw new UnsupportedOperationException("No components to return because of the operation is unsupported");
     }
 
     @Override
