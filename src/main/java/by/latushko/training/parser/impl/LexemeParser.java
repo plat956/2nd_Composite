@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class LexemeParser implements TextParser {
     private static final String LEXEME_DELIMITER_PATTERN = "\\S+";
     private static final String PUNCTUATION_PATTERN = "\\p{Punct}";
-    private static final String WORD_DELIMITER_PATTERN = "[А-я\\w]+";
+    private static final String WORD_PATTERN = "[А-я\\w]+";
     private final TextParser wordParser = new WordParser();
 
     @Override
@@ -23,7 +23,7 @@ public class LexemeParser implements TextParser {
 
         while (lexemes.find()) {
             String lexeme = lexemes.group();
-            if(lexeme.matches(WORD_DELIMITER_PATTERN)) {
+            if(lexeme.matches(WORD_PATTERN)) {
                 TextComponent wordComponent = wordParser.parse(lexeme);
                 lexemeComposite.add(wordComponent);
             } else {
@@ -31,7 +31,7 @@ public class LexemeParser implements TextParser {
                     lexemeComposite.add(new CharacterNode(TextComponentType.PUNCTUATION, lexeme.charAt(0)));
                 } else {
                     String possibleWord = lexeme.substring(0, lexeme.length() - 1);
-                    if (possibleWord.matches(WORD_DELIMITER_PATTERN)) {
+                    if (possibleWord.matches(WORD_PATTERN)) {
                         TextComponent wordComponent = wordParser.parse(possibleWord);
                         lexemeComposite.add(wordComponent);
                         lexemeComposite.add(new CharacterNode(TextComponentType.CHARACTER, lexeme.charAt(possibleWord.length())));
