@@ -17,5 +17,5 @@ public interface TextAnalyzeService {
 
     int countVowels(TextComposite composite, int paragraphNumber, int sentenceNumber);
 
-    void deleteSentencesByWordsCountLessThan(TextComposite composite, int count);
+    void deleteSentencesByWordsCountLessThan(TextComposite composite, int minCount);
 }

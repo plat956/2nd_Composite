@@ -10,7 +10,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class DataReaderImpl implements DataReader {
     private static final Logger logger = LogManager.getLogger();

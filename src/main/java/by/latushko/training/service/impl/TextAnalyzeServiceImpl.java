@@ -4,11 +4,11 @@ import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static by.latushko.training.entity.TextComponentType.CHARACTER;
-import static by.latushko.training.entity.TextComponentType.LETTER;
+import static by.latushko.training.entity.TextComponentType.*;
 
 public class TextAnalyzeServiceImpl implements TextAnalyzeService{
     private static final String VOWEL_PATTERN = "[aeiouауоыиэяюёе]+";
@@ -35,15 +35,32 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
 
     @Override
     public Map<String, Integer> findRepeatedWordsCount(TextComposite composite) {
-        return null; //todo 4 Найти в тексте все одинаковые слова без учета регистра и посчитать их количество.
+        Map<String, Integer> words = new HashMap<>();
+
+        for(TextComponent p: composite.getComponents()) {
+            for(TextComponent s: p.getComponents()) {
+                for(TextComponent l: s.getComponents()) {
+                    if(l.getType() != CHARACTER) {
+                        for(TextComponent w: l.getComponents()) {
+                            String word = w.toString();
+                            words.put(word, words.getOrDefault(word, 0) + 1);
+                        }
+                    }
+                }
+            }
+        }
+        return words;
     }
 
     @Override
-    public void deleteSentencesByWordsCountLessThan(TextComposite composite, int count) {
-        //todo 3 Удалить из текста все предложения с числом слов меньше заданного.
+    public void deleteSentencesByWordsCountLessThan(TextComposite composite, int minCount) {
+        composite.getComponents().forEach(p -> p.getComponents()
+                .removeIf(s -> s.getComponents().stream()
+                        .filter(l -> l.getType() != CHARACTER).count() < minCount)
+        );
     }
 
-    private int countLetters(TextComposite composite, int paragraphNumber, int sentenceNumber, boolean countVowels) {
+    private int countLetters(TextComposite composite, int paragraphNumber, int sentenceNumber, boolean isVowelsCounting) {
         TextComponent paragraph = composite.getComponents().get(paragraphNumber - 1);
         TextComponent sentence = paragraph.getComponents().get(sentenceNumber - 1);
 
@@ -65,6 +82,6 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
             }
         }
 
-        return countVowels ? vowelCounter : consonantCounter;
+        return isVowelsCounting ? vowelCounter : consonantCounter;
     }
 }

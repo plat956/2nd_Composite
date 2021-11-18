@@ -6,8 +6,10 @@ import by.latushko.training.reader.impl.DataReaderImpl;
 import by.latushko.training.service.impl.TextAnalyzeService;
 import by.latushko.training.service.impl.TextAnalyzeServiceImpl;
 
+import java.util.Map;
+
 public class Main {
-    public static void main(String[] args) throws InputFileReadException, TextAnalyzingException {
+    public static void main(String[] args) throws InputFileReadException {
         DataReader reader = new DataReaderImpl();
         String source = reader.read("data/source.txt");
 
@@ -22,6 +24,8 @@ public class Main {
         int qwe = textAnalyzeService.countConsonants(composite, 4, 1);
 
         q = composite.toString();
+
+        textAnalyzeService.deleteSentencesByWordsCountLessThan(composite, 3);
 
         q = null;
     }
