@@ -30,17 +30,17 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
 
     @Override
     public List<TextComponent> findSentencesWithTheLongestWord(TextComposite composite) {
-        return null; //todo
+        return null; //todo 2 Найти предложения с самым длинным словом.
     }
 
     @Override
     public Map<String, Integer> findRepeatedWordsCount(TextComposite composite) {
-        return null; //todo
+        return null; //todo 4 Найти в тексте все одинаковые слова без учета регистра и посчитать их количество.
     }
 
     @Override
     public void deleteSentencesByWordsCountLessThan(TextComposite composite, int count) {
-        //todo
+        //todo 3 Удалить из текста все предложения с числом слов меньше заданного.
     }
 
     private int countLetters(TextComposite composite, int paragraphNumber, int sentenceNumber, boolean countVowels) {
