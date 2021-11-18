@@ -27,7 +27,7 @@ public class LexemeParser implements TextParser {
                 TextComponent wordComponent = wordParser.parse(lexeme);
                 lexemeComposite.add(wordComponent);
             } if(lexeme.matches(PUNCTUATION_PATTERN)) {
-                lexemeComposite.add(new CharacterNode(TextComponentType.PUNCTUATION, lexeme.charAt(0)));
+                lexemeComposite.add(new CharacterNode(TextComponentType.CHARACTER, lexeme.charAt(0)));
             }
         }
 
