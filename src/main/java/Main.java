@@ -1,6 +1,5 @@
 import by.latushko.training.entity.TextComposite;
 import by.latushko.training.exception.InputFileReadException;
-import by.latushko.training.exception.TextAnalyzingException;
 import by.latushko.training.parser.impl.ParagraphParser;
 import by.latushko.training.reader.DataReader;
 import by.latushko.training.reader.impl.DataReaderImpl;
@@ -20,7 +19,7 @@ public class Main {
         TextAnalyzeService textAnalyzeService = new TextAnalyzeServiceImpl();
         //textAnalyzeService.sortByParagraphSentencesCount(composite);
 
-        int qwe = textAnalyzeService.calculateConsonants(composite, 4, 1);
+        int qwe = textAnalyzeService.countConsonants(composite, 4, 1);
 
         q = composite.toString();
 
