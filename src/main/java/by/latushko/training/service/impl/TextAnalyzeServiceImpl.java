@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static by.latushko.training.entity.TextComponentType.*;
 
@@ -40,9 +41,13 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
         for(TextComponent p: composite.getComponents()) {
             for(TextComponent s: p.getComponents()) {
                 for(TextComponent l: s.getComponents()) {
-                    if(l.getType() != CHARACTER) {
+                    if(l.getType() != PUNCTUATION) {
                         for(TextComponent w: l.getComponents()) {
-                            String word = w.toString();
+                            String word = w.getComponents().stream()
+                                    .filter(c -> c.getType() == LETTER)
+                                    .map(TextComponent::toString)
+                                    .collect(Collectors.joining());
+
                             words.put(word, words.getOrDefault(word, 0) + 1);
                         }
                     }
@@ -56,7 +61,7 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
     public void deleteSentencesByWordsCountLessThan(TextComposite composite, int minCount) {
         composite.getComponents().forEach(p -> p.getComponents()
                 .removeIf(s -> s.getComponents().stream()
-                        .filter(l -> l.getType() != CHARACTER).count() < minCount)
+                        .filter(l -> l.getType() != PUNCTUATION).count() < minCount)
         );
     }
 
@@ -67,7 +72,7 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
         int vowelCounter = 0;
         int consonantCounter = 0;
         for(TextComponent lexeme: sentence.getComponents()) {
-            if(lexeme.getType() != CHARACTER) {
+            if(lexeme.getType() != PUNCTUATION) {
                 for (TextComponent word : lexeme.getComponents()) {
                     for (TextComponent letter : word.getComponents()) {
                         if (letter.getType() == LETTER) {

@@ -25,7 +25,7 @@ public class Main {
 
         q = composite.toString();
 
-        textAnalyzeService.deleteSentencesByWordsCountLessThan(composite, 3);
+        Map d = textAnalyzeService.findRepeatedWordsCount(composite);
 
         q = null;
     }

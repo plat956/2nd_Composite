@@ -6,7 +6,8 @@ public enum TextComponentType {
     LEXEME("", ""),
     WORD(" ", ""),
     LETTER("", ""),
-    CHARACTER("", "");
+    CHARACTER("", ""),
+    PUNCTUATION(" ", "");
 
     private final String prefix;
     private final String postfix;
