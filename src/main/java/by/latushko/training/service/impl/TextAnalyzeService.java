@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TextAnalyzeService {
-    List<TextComponent> findSentencesWithTheLongestWord(TextComposite composite);
+    TextComponent findSentenceWithTheLongestWord(TextComposite composite);
 
     Map<String, Integer> findRepeatedWordsCount(TextComposite composite);
 

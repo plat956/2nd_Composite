@@ -1,3 +1,4 @@
+import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
 import by.latushko.training.exception.InputFileReadException;
 import by.latushko.training.parser.impl.ParagraphParser;
@@ -6,6 +7,7 @@ import by.latushko.training.reader.impl.DataReaderImpl;
 import by.latushko.training.service.impl.TextAnalyzeService;
 import by.latushko.training.service.impl.TextAnalyzeServiceImpl;
 
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -25,7 +27,7 @@ public class Main {
 
         q = composite.toString();
 
-        Map d = textAnalyzeService.findRepeatedWordsCount(composite);
+        textAnalyzeService.findRepeatedWordsCount(composite);
 
         q = null;
     }

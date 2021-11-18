@@ -3,10 +3,7 @@ package by.latushko.training.service.impl;
 import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static by.latushko.training.entity.TextComponentType.*;
@@ -30,8 +27,29 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
     }
 
     @Override
-    public List<TextComponent> findSentencesWithTheLongestWord(TextComposite composite) {
-        return null; //todo 2 Найти предложения с самым длинным словом.
+    public TextComponent findSentenceWithTheLongestWord(TextComposite composite) {
+        Map<TextComponent, Long> words = new HashMap<>();
+
+        for(TextComponent p: composite.getComponents()) {
+            for(TextComponent s: p.getComponents()) {
+                for(TextComponent l: s.getComponents()) {
+                    if(l.getType() != PUNCTUATION) {
+                        for(TextComponent w: l.getComponents()) {
+                            long wordLength = w.getComponents().stream()
+                                    .filter(c -> c.getType() == LETTER)
+                                    .count();
+                            words.put(s, wordLength);
+                        }
+                    }
+                }
+            }
+        }
+
+        Map.Entry<TextComponent, Long> longestWordEntry = words.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .get();
+
+        return longestWordEntry.getKey();
     }
 
     @Override
