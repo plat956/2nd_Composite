@@ -2,6 +2,8 @@ package by.latushko.training.service.impl;
 
 import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,26 +11,39 @@ import java.util.stream.Collectors;
 import static by.latushko.training.entity.TextComponentType.*;
 
 public class TextAnalyzeServiceImpl implements TextAnalyzeService{
+    private static final Logger logger = LogManager.getLogger();
     private static final String VOWEL_PATTERN = "[aeiouауоыиэяюёе]+";
 
     @Override
     public void sortByParagraphSentencesCount(TextComposite composite) {
         composite.getComponents().sort(Comparator.comparingInt(c -> c.getComponents().size()));
+
+        logger.info("TextComposite {} has been sorted by sentences count", composite.hashCode());
     }
 
     @Override
     public int countConsonants(TextComposite composite, int paragraphNumber, int sentenceNumber) {
-        return countLetters(composite, paragraphNumber, sentenceNumber, false);
+        int count = countLetters(composite, paragraphNumber, sentenceNumber, false);
+
+        logger.info("TextComposite {}: Sentence number {} in paragraph {} contains {} consonants",
+                composite.hashCode(), sentenceNumber, paragraphNumber, count);
+
+        return count;
     }
 
     @Override
     public int countVowels(TextComposite composite, int paragraphNumber, int sentenceNumber) {
-        return countLetters(composite, paragraphNumber, sentenceNumber, true);
+        int count = countLetters(composite, paragraphNumber, sentenceNumber, true);
+
+        logger.info("TextComposite {}: Sentence number {} in paragraph {} contains {} vowels",
+                composite.hashCode(), sentenceNumber, paragraphNumber, count);
+
+        return count;
     }
 
     @Override
     public TextComponent findSentenceWithTheLongestWord(TextComposite composite) {
-        Map<TextComponent, Long> words = new HashMap<>();
+        Map<TextComponent, Long> sentenceMap = new HashMap<>();
 
         for(TextComponent p: composite.getComponents()) {
             for(TextComponent s: p.getComponents()) {
@@ -38,16 +53,19 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
                             long wordLength = w.getComponents().stream()
                                     .filter(c -> c.getType() == LETTER)
                                     .count();
-                            words.put(s, wordLength);
+                            sentenceMap.put(s, wordLength);
                         }
                     }
                 }
             }
         }
 
-        Map.Entry<TextComponent, Long> longestWordEntry = words.entrySet().stream()
+        Map.Entry<TextComponent, Long> longestWordEntry = sentenceMap.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .get();
+
+        logger.info("TextComposite {}: The sentence containing the longest word is: \"{}\"",
+                composite.hashCode(), longestWordEntry.getKey());
 
         return longestWordEntry.getKey();
     }
@@ -72,6 +90,13 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
                 }
             }
         }
+
+        logger.info("TextComposite {}: Repeated words and their frequencies: \"{}\"",
+                composite.hashCode(),
+                words.keySet().stream()
+                        .map(key -> key + "=" + words.get(key))
+                        .collect(Collectors.joining(", ", "{", "}")));
+
         return words;
     }
 
@@ -81,6 +106,8 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
                 .removeIf(s -> s.getComponents().stream()
                         .filter(l -> l.getType() != PUNCTUATION).count() < minCount)
         );
+
+        logger.info("TextComposite {}: Sentences consisting less than {} words have been removed", composite.hashCode(), minCount);
     }
 
     private int countLetters(TextComposite composite, int paragraphNumber, int sentenceNumber, boolean isVowelsCounting) {
