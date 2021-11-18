@@ -4,6 +4,8 @@ import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 import static by.latushko.training.entity.TextComponentType.CHARACTER;
 import static by.latushko.training.entity.TextComponentType.LETTER;
@@ -24,6 +26,21 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
     @Override
     public int countVowels(TextComposite composite, int paragraphNumber, int sentenceNumber) {
         return countLetters(composite, paragraphNumber, sentenceNumber, true);
+    }
+
+    @Override
+    public List<TextComponent> findSentencesWithTheLongestWord(TextComposite composite) {
+        return null; //todo
+    }
+
+    @Override
+    public Map<String, Integer> findRepeatedWordsCount(TextComposite composite) {
+        return null; //todo
+    }
+
+    @Override
+    public void deleteSentencesByWordsCountLessThan(TextComposite composite, int count) {
+        //todo
     }
 
     private int countLetters(TextComposite composite, int paragraphNumber, int sentenceNumber, boolean countVowels) {
