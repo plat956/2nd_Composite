@@ -7,6 +7,7 @@ import by.latushko.training.parser.TextParser;
 import by.latushko.training.parser.impl.ParagraphParser;
 import by.latushko.training.reader.DataReader;
 import by.latushko.training.reader.impl.DataReaderImpl;
+import by.latushko.training.service.TextAnalyzeService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

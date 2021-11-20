@@ -5,7 +5,7 @@ import by.latushko.training.exception.InputFileReadException;
 import by.latushko.training.parser.impl.ParagraphParser;
 import by.latushko.training.reader.DataReader;
 import by.latushko.training.reader.impl.DataReaderImpl;
-import by.latushko.training.service.impl.TextAnalyzeService;
+import by.latushko.training.service.TextAnalyzeService;
 import by.latushko.training.service.impl.TextAnalyzeServiceImpl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

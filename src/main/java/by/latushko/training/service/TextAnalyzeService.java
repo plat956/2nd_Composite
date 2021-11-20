@@ -1,4 +1,4 @@
-package by.latushko.training.service.impl;
+package by.latushko.training.service;
 
 import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;

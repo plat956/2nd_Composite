@@ -2,6 +2,7 @@ package by.latushko.training.service.impl;
 
 import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
+import by.latushko.training.service.TextAnalyzeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static by.latushko.training.entity.TextComponentType.*;
 
-public class TextAnalyzeServiceImpl implements TextAnalyzeService{
+public class TextAnalyzeServiceImpl implements TextAnalyzeService {
     private static final Logger logger = LogManager.getLogger();
     private static final String VOWEL_PATTERN = "[aeiouауоыиэяюёе]+";
 
