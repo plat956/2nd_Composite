@@ -71,7 +71,7 @@ public class TextAnalyzeServiceImpl implements TextAnalyzeService{
     }
 
     @Override
-    public Map<String, Integer> findRepeatedWordsCount(TextComposite composite) {
+    public Map<String, Integer> findRepeatedWordsWithCount(TextComposite composite) {
         Map<String, Integer> words = new HashMap<>();
 
         for(TextComponent p: composite.getComponents()) {

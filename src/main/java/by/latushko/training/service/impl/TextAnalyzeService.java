@@ -9,7 +9,7 @@ import java.util.Map;
 public interface TextAnalyzeService {
     TextComponent findSentenceWithTheLongestWord(TextComposite composite);
 
-    Map<String, Integer> findRepeatedWordsCount(TextComposite composite);
+    Map<String, Integer> findRepeatedWordsWithCount(TextComposite composite);
 
     void sortByParagraphSentencesCount(TextComposite composite);
 

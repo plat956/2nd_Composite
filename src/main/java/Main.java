@@ -1,4 +1,3 @@
-import by.latushko.training.entity.TextComponent;
 import by.latushko.training.entity.TextComposite;
 import by.latushko.training.exception.InputFileReadException;
 import by.latushko.training.parser.impl.ParagraphParser;
@@ -6,9 +5,6 @@ import by.latushko.training.reader.DataReader;
 import by.latushko.training.reader.impl.DataReaderImpl;
 import by.latushko.training.service.impl.TextAnalyzeService;
 import by.latushko.training.service.impl.TextAnalyzeServiceImpl;
-
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws InputFileReadException {
@@ -27,7 +23,7 @@ public class Main {
 
         q = composite.toString();
 
-        textAnalyzeService.findRepeatedWordsCount(composite);
+        textAnalyzeService.findRepeatedWordsWithCount(composite);
 
         q = null;
     }
