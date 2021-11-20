@@ -35,7 +35,9 @@ public class TextComposite implements TextComponent{
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        for(TextComponent c: components) {
+        for(int i = 0; i < components.size(); i++) {
+            TextComponent c = components.get(i);
+
             if (type == TextComponentType.PARAGRAPH) {
                 sb.append(type.getPrefix());
             }
@@ -48,7 +50,7 @@ public class TextComposite implements TextComponent{
 
             sb.append(temp);
 
-            if (type == TextComponentType.PARAGRAPH) {
+            if (type == TextComponentType.PARAGRAPH && i < components.size() - 1) {
                 sb.append(type.getPostfix());
             }
         }
